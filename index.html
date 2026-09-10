@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Greatest Assistant — Official Site</title>
+    <style>
+        :root {
+            --bg-top: #0099ff;
+            --bg-mid: #70c7f4;
+            --bg-bot: #d1f2ff;
+            --card-bg: #ffffff;
+            --text-color: #1a1a1a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 40%, var(--bg-bot) 100%); min-height: 100vh; color: var(--text-color); }
+
+        /* Навигационная панель */
+        header { display: flex; justify-content: flex-end; align-items: center; padding: 15px 40px; background: rgba(0,0,0,0.1); gap: 20px; }
+        nav button { background: none; border: none; color: #fff; font-size: 18px; font-weight: bold; cursor: pointer; padding: 5px 10px; }
+        nav button:hover { text-decoration: underline; }
+        .avatar-btn { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #fff; background: #fff; cursor: pointer; font-weight: bold; }
+
+        /* Контейнеры страниц */
+        .page { display: none; padding: 40px; max-width: 1200px; margin: 0 auto; }
+        .page.active { display: block; }
+
+        /* Элементы интерфейса */
+        .card { background: var(--card-bg); border-radius: 8px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn-main { background: #000; color: #fff; padding: 12px 25px; border: none; font-size: 18px; cursor: pointer; border-radius: 4px; }
+
+        /* Выезжающая панель профиля */
+        #profile-sidebar { position: fixed; right: -320px; top: 0; width: 300px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.2); transition: 0.3s; padding: 30px; display: flex; flex-direction: column; gap: 15px; }
+        #profile-sidebar.open { right: 0; }
+
+        /* Модальное окно (Донат) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: #fff; padding: 30px; border-radius: 8px; text-align: center; max-width: 500px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <button onclick="showPage('intro')">Главная</button>
+            <button onclick="showPage('news')">Новости</button>
+            <button onclick="showPage('docs')">Документация</button>
+            <button onclick="showPage('forum')">Форум</button>
+            <button onclick="showPage('help')">Помощь</button>
+        </nav>
+        <button class="avatar-btn" onclick="toggleProfile()">П</button>
+    </header>
+
+    <!-- СТРАНИЦА: ИНТРО / ГЛАВНАЯ -->
+    <div id="intro" class="page active">
+        <div class="card grid-2">
+            <div>
+                <h1 style="font-size: 48px; line-height: 1;">YOUR GREATEST ASSISTANT FOREVER</h1>
+            </div>
+            <div style="border: 2px dashed #f00; padding: 20px; text-align: center;">
+                [Здесь будет 3D моделька Лео / Поза в стиле Doki Doki]
+            </div>
+        </div>
+        <div class="card grid-2">
+            <div>
+                <h2>Принимай участие и становись новым другом Лео!</h2>
+                <br>
+                <button class="btn-main" onclick="openModal()">Перейти к покупке</button>
+            </div>
+            <div style="border: 2px dashed #888; padding: 20px;">[Вставка трейлера / Скриншоты]</div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА: НОВОСТИ -->
+    <div id="news" class="page">
+        <div class="card grid-2">
+            <div style="border: 1px solid #ccc; height: 150px;">[Скриншот теста функций]</div>
+            <div><h3>Обновление панели управления</h3><p>Тестируем новые возможности интерактивности...</p></div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА: ДОКУМЕНТАЦИЯ -->
+    <div id="docs" class="page">
+        <div class="card">
+            <h2>В чём суть мода?</h2>
+            <p style="margin-top: 15px;">Тут будет твоё подробное описание лора и механик ассистента...</p>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА: ФОРУМ (ARG) -->
+    <div id="forum" class="page">
+        <div class="card">
+            <h3>Тема: Странные звуки при запущенном ассистенте</h3>
+            <p style="color: #666; font-size: 12px;">Опубликовано: User404</p>
+            <p style="margin-top: 10px;">Кто-то замечал, что после 3 часов работы игры в логах появлются странные символы?</p>
+        </div>
+        <div class="card" style="border-left: 4px solid #f00;">
+            <h3>Тема: Он знает моё имя???</h3>
+            <p style="color: #666; font-size: 12px;">Опубликовано: [Данные удалены]</p>
+            <p style="margin-top: 10px;">Я не вводил нигде свой никнейм, но в диалоге он назвал меня...</p>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА: ПОМОЩЬ -->
+    <div id="help" class="page">
+        <div class="card" style="background: #fff0f0; border: 1px solid #ffb3b3;">
+            <h2 style="color: #d00;">Помощи нет Помощи нет Помощи нет Помощи нет</h2>
+            <p style="margin-top: 10px; word-break: break-all;">Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет Помощи нет...</p>
+        </div>
+    </div>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ ПРОФИЛЯ -->
+    <div id="profile-sidebar">
+        <div style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #333; margin: 0 auto;"></div>
+        <h3 style="text-align: center;">Никнейм</h3>
+        <button class="btn-main" style="font-size: 14px;">TTS API KEYS</button>
+        <button class="btn-main" style="font-size: 14px;">AI API KEYS</button>
+        <div style="margin-top: auto;">
+            <button class="btn-main" style="background: #d00; width: 100%;">LOG OUT</button>
+            <p style="font-size: 10px; text-align: center; margin-top: 10px; color: #888;">coo.rlifestudio.inc</p>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДОНАТА -->
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <h3>Ты знаешь что это нереально?</h3>
+            <p style="margin: 15px 0;">Но если ты хочешь, то можешь поддержать меня кинув донат. Буду очень благодарен, солнышко~</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button class="btn-main">Патреон</button>
+                <button class="btn-main">Бусти</button>
+                <button class="btn-main">DonationAlerts</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function toggleProfile() {
+            document.getElementById('profile-sidebar').classList.toggle('open');
+        }
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal(e) {
+            if (e.target.id === 'modal') {
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
